@@ -7,8 +7,10 @@ import authRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
+import bannerRoutes from "./routes/bannerRoutes.js";
 import path from "path";
 import { fileURLToPath } from "url"; // ✅ ES Module fix for __dirname
+
 
 // Fix __dirname for ES Module scope
 const __filename = fileURLToPath(import.meta.url);
@@ -43,6 +45,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/admin", adminRoutes);
+app.use('/api/banners', bannerRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
