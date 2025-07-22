@@ -151,3 +151,22 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: "Failed to delete product", error: error.message });
   }
 };
+// @desc    Get a single product by ID
+// @route   GET /api/products/:id
+// @access  Public
+export const getProductById = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const product = await productModel.findById(id);
+
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    res.status(200).json({ success: true, product });
+  } catch (error) {
+    console.error("Error fetching product by ID:", error);
+    res.status(500).json({ message: "Failed to fetch product", error: error.message });
+  }
+};

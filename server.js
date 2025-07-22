@@ -8,6 +8,19 @@ import productRoutes from "./routes/productRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
 import categoryRoutes from "./routes/categoryRoutes.js";
 import bannerRoutes from "./routes/bannerRoutes.js";
+import featureRoutes from "./routes/featureRoutes.js";
+import offerBannerRoutes from "./routes/offerBannerRoutes.js";
+import testimonialRoutes from "./routes/testimonialRoutes.js";
+import contactInfoRoutes from "./routes/contactInfoRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
+import mapEmbedRoutes from "./routes/mapEmbedRoutes.js";
+import missionRoutes from "./routes/missionRoutes.js";
+import coreValueRoutes from "./routes/coreValueRoutes.js";
+import leaderRoutes from "./routes/leaderRoutes.js";
+import aboutRoutes from "./routes/aboutRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
+
+
 import path from "path";
 import { fileURLToPath } from "url"; // ✅ ES Module fix for __dirname
 
@@ -46,6 +59,19 @@ app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/admin", adminRoutes);
 app.use('/api/banners', bannerRoutes);
+app.use('/api/features', featureRoutes);
+app.use("/api/offer-banners", offerBannerRoutes);
+app.use("/api/testimonials", testimonialRoutes);
+app.use('/api/contact-info', contactInfoRoutes)
+app.use('/api/messages', messageRoutes);
+app.use("/api/map-embed", mapEmbedRoutes);
+app.use("/api/core-values", coreValueRoutes);
+app.use("/api/missions", missionRoutes);
+app.use("/api/leaders", leaderRoutes);
+app.use("/api/about", aboutRoutes);
+app.use('/api/orders', orderRoutes);
+
+
 
 // Start the server
 const PORT = process.env.PORT || 5000;
