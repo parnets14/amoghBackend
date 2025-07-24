@@ -69,29 +69,44 @@ export const createProduct = async (req, res) => {
   }
 };
 
+// export const getAllProducts = async (req, res) => {
+//   try {
+//     // Parse pagination query params (with defaults)
+//     const page = parseInt(req.query.page) || 1; // current page
+//     const pageSize = parseInt(req.query.pageSize) || 10; // items per page
+
+//     const skip = (page - 1) * pageSize;
+
+//     // Fetch total product count for frontend use
+//     const total = await productModel.countDocuments();
+
+//     // Fetch paginated products
+//     const products = await productModel
+//       .find()
+//       .skip(skip)
+//       .limit(pageSize)
+//       .sort({ createdAt: -1 }); // Optional: latest first
+
+//     res.status(200).json({
+//       total,
+//       page,
+//       pageSize,
+//       totalPages: Math.ceil(total / pageSize),
+//       products,
+//     });
+//   } catch (error) {
+//     res.status(500).json({
+//       message: "Failed to fetch products",
+//       error: error.message,
+//     });
+//   }
+// };
 export const getAllProducts = async (req, res) => {
   try {
-    // Parse pagination query params (with defaults)
-    const page = parseInt(req.query.page) || 1; // current page
-    const pageSize = parseInt(req.query.pageSize) || 10; // items per page
-
-    const skip = (page - 1) * pageSize;
-
-    // Fetch total product count for frontend use
-    const total = await productModel.countDocuments();
-
-    // Fetch paginated products
-    const products = await productModel
-      .find()
-      .skip(skip)
-      .limit(pageSize)
-      .sort({ createdAt: -1 }); // Optional: latest first
+    const products = await productModel.find().sort({ createdAt: -1 }); // Optional: latest first
 
     res.status(200).json({
-      total,
-      page,
-      pageSize,
-      totalPages: Math.ceil(total / pageSize),
+      total: products.length,
       products,
     });
   } catch (error) {

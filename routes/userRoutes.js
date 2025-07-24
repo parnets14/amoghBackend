@@ -1,12 +1,36 @@
-import express from 'express';
-import { getMe, login, register } from '../controllers/userController.js';
-import { protect } from '../middleware/authMiddleware.js';
 
+import express from "express"
+import {
+  getMe,
+  login,
+  register,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser,
+  uploadUserPhoto,
+} from "../controllers/userController.js"
+import { protect, authorize } from "../middleware/authMiddleware.js"
+import upload from "../middleware/UserImage.js"
 
-const authRoutes = express.Router();
+const router = express.Router()
 
-authRoutes.post('/register', register);
-authRoutes.post('/login', login);
-authRoutes.get('/me', protect, getMe);
+// Public routes
+router.post("/register", register)
+router.post("/login", login)
 
-export default authRoutes;
+// Protected routes (require authentication)
+router.use(protect)
+router.get("/me", getMe)
+
+// Use multer middleware for profile update (handles both file and text fields)
+router.put("/update-profile", upload.single("profileImage"), updateUser)
+router.put("/upload-photo", upload.single("profileImage"), uploadUserPhoto)
+
+// Admin-only routes
+router.use(authorize("admin"))
+router.get("/users", getUsers) // Changed from "/" to "/users" for clarity
+router.get("/users/:id", getUserById) // Changed from "/:id" to "/users/:id"
+router.delete("/users/:id", deleteUser) // Changed from "/:id" to "/users/:id"
+
+export default router

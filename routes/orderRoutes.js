@@ -217,7 +217,8 @@ import {
   getOrderById,
   getMyOrders,
   getOrders,
-  updateOrderToDelivered
+  updateOrderToDelivered,
+  updateOrderStatus
 } from '../controllers/orderController.js';
 import { protect, admin } from '../middleware/auth.js';
 
@@ -230,5 +231,6 @@ router.route('/')
 router.route('/myorders').get(protect, getMyOrders);
 router.route('/:id').get(protect, getOrderById);
 router.route('/:id').put(protect, updateOrderToDelivered);
+router.put('/:id/status', updateOrderStatus);
 
 export default router;
